@@ -1,0 +1,28 @@
+server:
+  port: 10070
+  server:
+    tomcat:
+      accept-count: 500
+      max-threads: 500
+      min-spare-threads: 100
+      max-connections: 1000
+      connection-timeout: 5000
+spring:
+  application:
+    name: pocket-hystrix-turbine
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${ticket.eureka.serviceUrl}
+  instance:
+    prefer-ip-address: true
+
+turbine:
+  aggregator:
+    clusterConfig: ticket-PROVIDER-DATA,ticket-PROVIDER-USER,ticket-PROVIDER-SMS,ticket-PROVIDER-P2M,ticket-FILE-STORE
+  appConfig: ticket-provider-data,ticket-provider-user,ticket-provider-sms,ticket-provider-p2m,ticket-file-store
+
+logging:
+  level:
+    root: INFO
+    com.netflix.turbine.monitor: DEBUG

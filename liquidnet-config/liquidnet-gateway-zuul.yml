@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: pocket-gateway-zuul
+server:
+  port: 8040
+  server:
+    tomcat:
+      accept-count: 500
+      max-threads: 500
+      min-spare-threads: 100
+      max-connections: 1000
+      connection-timeout: 5000
+
+eureka:
+    client:
+        healthcheck:
+          enabled: true
+        serviceUrl:
+          defaultZone: ${ticket.eureka.serviceUrl}
+    instance:
+        prefer-ip-address: true
+        instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+        lease-renewal-interval-in-seconds: 15
+        lease-expiration-duration-in-seconds: 30
+        metadata-map:
+          zone: YGZX      # eureka可以理解的元数据
+          ticket: YGZX  # 不会影响客户端行为
+    server:
+      eviction-interval-timer-in-ms: 30000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+  eureka:
+        enabled: true
+
+
+zuul:
+  host:
+    max-per-route-connections: 1000
+    max-total-connections: 2000
+  routes:
+    pocket-provider-sms: /sms/**
+    pocket-provider-sequence: /sequence/**
+    pocket-provider-data: /data/**
+    pocket-provider-user: /user/**
+    pocket-provider-p2m: /p2m/**
+    pocket-provider-activity: /activity/**
+    pay-third-charge: /pay_charge/**
+    pocket-pay-query: /pay_query/**
+    pocket-client-app: /app_api/**
+
+zuul.ThrowExceptionPostFilter.post.disable: true
+
+logging:
+  level:
+    com.netflix: debug
+
+#zuul:
+#  prefix: /api
+#  strip-prefix: false

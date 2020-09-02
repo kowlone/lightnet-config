@@ -1,0 +1,12 @@
+server:
+  port: 10060
+  server:
+    tomcat:
+      accept-count: 500
+      max-threads: 500
+      min-spare-threads: 100
+      max-connections: 1000
+      connection-timeout: 5000
+spring:
+    application:
+      name: pocket-hystrix-dashboard
