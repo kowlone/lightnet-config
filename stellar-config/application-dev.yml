@@ -1,0 +1,21 @@
+lightnet:
+  main-url: http://www.liquidnet.com
+  mysql:
+    urlHostAndPort: localhost:20052
+    database-name: stellar_bus
+    username: root
+    password: my-secret-pw-430
+  rabbitmq:
+    host: 101.201.100.206
+    port: 5672
+    username: admin
+    password: admin
+  redis:
+    host: 34.92.245.187
+    port: 6379
+    password: Lightnet12!
+  stellar:
+    url: https://horizon-testnet.stellar.org
+  logfile:
+    path: D:/logfile
+    name: stellar-web.log
